@@ -1,26 +1,40 @@
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 
 const project = [
     {
         id: 1,
-        title: "robot",
-        description: "robot project",
-        image: "/projects/TopGeneral1.0000.png",
-        demoUrl: "#"
+        title: "Stocks",
+        description: "World map stock viewer",
+        image: "/projects/stocks-map.png",
+        demoUrl: "https://simple-stocks.vercel.app/world"
     },
     {
         id: 2,
-        title: "Coding",
-        description: "Learn to code",
-        image: "/projects/Seagulls.png",
-        demoUrl: "#"
+        title: "Game of Life",
+        description: "Conway's Game of Life",
+        image: "/projects/game-of-life.png",
+        demoUrl: "https://leanforward-backend.github.io/game-of-life/build/web/index.html"
     },
     {
         id: 3,
-        title: "Rendering",
-        description: "Learn to render",
-        image: "https://i.vimeocdn.com/video/1971185823-511d763b00ff3ecb3d6ecd5430fcf151d0288d3a5dcf7a55b28ed601a079fa67-d?f=webp",
-        demoUrl: "#",
-        gitUrl: "#"
+        title: "Gym Orm app",
+        description: "Gym Orm app",
+        image: "/projects/orm.png",
+        demoUrl: "https://gym-orm.vercel.app/",
+    },
+    {
+        id: 4,
+        title: "Weather App",
+        description: "Weather App",
+        image: "/projects/weather-app.png",
+        demoUrl: "#"
+    },
+    {
+        id: 5,
+        title: "Coding",
+        description: "Learn to code",
+        image: "/projects/Seagulls.png",
+        demoUrl: "https://23-mddn342.github.io/project-2-randomised-collections-TobyCrust/"
     }
 ]
 
@@ -33,21 +47,26 @@ export const Projects = () => {
                 </h2>
 
                 <p className="text-center text-muted-forground mb-12 max-w-2xl mx-auto">
-                    Here are some things to look at let me know If you would like me to tech you some stuff
+                    Here are projects I have created in my spare time. I am only able to talk about work projects and not display them.
                 </p>
-
-                <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {project.map((projects, key) => (
-                        <div
-                            key={key}
-                            className=" group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
-                        >
-                            <div className="h-48 overflow-hidden">
-                                <img src={projects.image} alt={projects.title} className="w-full h-full object-cover transition-transform duration-500 group-hover-scale-110" />
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <Carousel
+                    opts={{
+                        align: "start",
+                    }}
+                    className="w-full max-w-5xl"
+                >
+                    <CarouselContent>
+                        {project.map((projects, key) => (
+                            <CarouselItem key={key} className="md:basis-1/2 lg:basis-1/3 cursor-pointer" onClick={() => projects.demoUrl ? window.open(projects.demoUrl, "_blank") : null}>
+                                <div className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover h-58">
+                                    <img src={projects.image} alt={projects.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                </Carousel>
             </div>
         </section>
     )
