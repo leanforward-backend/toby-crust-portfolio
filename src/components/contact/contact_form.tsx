@@ -38,19 +38,19 @@ export const ContactForm = () => {
     const onSubmit = async (data: EmailFormValues) => {
         try {
 
-            // const emailJsResult = await emailjs.send(
-            //     'service_bvidwob',
-            //     'template_unjgzur',
-            //     {
-            //         to_name: data.name,
-            //         to_email: data.email,
-            //         subject: data.subject || 'Thanks for contacting us!',
-            //         message: data.message || 'No message provided',
-            //     },
-            //     '9q7mZH59KDwEyGWH9'
-            // );
+            const emailJsResult = await emailjs.send(
+                'service_bvidwob',
+                'template_unjgzur',
+                {
+                    to_name: data.name,
+                    to_email: data.email,
+                    subject: data.subject || 'Thanks for contacting us!',
+                    message: data.questions || 'No message provided',
+                },
+                'oYIz4u3-WzNncKohK'
+            );
 
-            // console.log('Confirmation email sent to user:', emailJsResult);
+            console.log('Confirmation email sent to user:', emailJsResult);
 
 
             const resendResult = await fetch('/api/send-email', {

@@ -39,7 +39,7 @@ export const VercelInviteUserEmail = ({
                     <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
                         <Section className="mt-[32px]">
                             <Heading className="text-black text-[24px] font-normal p-0 my-[30px] mx-0">
-                                New Contact Request
+                                New Portfolio contact
                             </Heading>
                         </Section>
 
