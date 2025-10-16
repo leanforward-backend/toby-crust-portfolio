@@ -39,8 +39,8 @@ export const ContactForm = () => {
         try {
 
             const emailJsResult = await emailjs.send(
-                'service_bvidwob',
-                'template_unjgzur',
+                'service_n037nlc',
+                'template_o099nq6',
                 {
                     to_name: data.name,
                     to_email: data.email,
