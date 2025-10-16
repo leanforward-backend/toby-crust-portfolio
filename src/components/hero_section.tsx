@@ -1,7 +1,7 @@
 import { Button } from "./ui/button"
 
 export const HeroSection = () => {
-    return <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4">
+    return <section id="hero" className="relative min-h-[85vh] flex flex-col items-center justify-center px-4">
 
         <div className="container max-w-4xl mx-auto text-center z-10">
             <div className="space-y-6">
@@ -13,7 +13,7 @@ export const HeroSection = () => {
                 </h1>
 
                 <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-                    I've dipped my fingers into just about every tech related field and I'm here to bring my expertise to you for cash :)
+                    Software Engineer ready to take my next step in the tech industry.
                 </p>
 
                 <div className="pt-4 opacity-0 animate-fade-in-delay-4">
