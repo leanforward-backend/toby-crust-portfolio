@@ -42,7 +42,7 @@ export const ContactInformation = () => {
                         <a
                             className="text-muted-forground hover:text-primary transition-colors"
                         >
-                            Vaulcluse
+                            Sydney, Australia
                         </a>
                     </div>
                 </div>
