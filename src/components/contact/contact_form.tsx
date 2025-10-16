@@ -65,7 +65,7 @@ export const ContactForm = () => {
                 throw new Error('Failed to send notification email');
             }
 
-            alert(`Thanks for getting in touch ${data.name}! You will receive a confirmation email shortly.`)
+            alert(`Thanks for getting in touch ${data.name}! I'll get back to you as soon as I can.`)
             form.reset()
 
         } catch (error) {
