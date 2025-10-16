@@ -38,8 +38,6 @@ export const Navbar = () => {
                         Portfolio
                     </span>
                 </a>
-
-                {/* Desktop nav */}
                 <div className={"hidden md:flex space-x-8"}>
                     {navItems.map((item, key) => (
                         <a
@@ -47,9 +45,6 @@ export const Navbar = () => {
                             href={item.href} className="text-foreground/80 hover:text-primary transition-colors duration-300"> {item.name} </a>
                     ))}
                 </div>
-
-                {/* Mobile nav */}
-
                 <button
                     onClick={() => setisMenuOpen((prev) => !prev)}
                     className="md:hidden p-2 text-forground z-50"

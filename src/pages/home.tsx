@@ -9,7 +9,7 @@ import { Footer } from "@/components/footer"
 
 export const Home = () => {
     return (
-        <div className={" min-h-screen text-foreground transition-colors duration-300"}>
+        <div className={" min-h-screen bg-background text-foreground transition-colors duration-300"}>
             <ThemeToggle />
 
             {/* Background Effects */}

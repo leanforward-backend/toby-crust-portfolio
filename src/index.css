@@ -79,7 +79,7 @@
 
 @layer base {
   :root {
-    --background: 190 40% 89%;
+    --background: linear-gradient(45deg, #ffffff, #fdfffd, #23a6d5, #8bcebe);
 
     --foreground: 239 90% 19%;
 
@@ -98,19 +98,19 @@
   }
 
   .dark {
-    --background: 206 97% 15%;
-    --foreground: 202 56% 38%;
+    --background: 216 28% 7%;
+    --foreground: 200 20% 88%;
 
-    --card: 214 97% 27%;
-    --card-foreground: 190 40% 89%;
+    --card: 215 25% 12%;
+    --card-foreground: 200 15% 92%;
 
-    --muted: 201 100% 36%;
-    --muted-foreground: 189 63% 76%;
+    --muted: 215 20% 18%;
+    --muted-foreground: 200 10% 65%;
 
-    --primary: 195 100% 43%;
-    --primary-foreground: 239 90% 19%;
+    --primary: 265 60% 55%;
+    --primary-foreground: 216 30% 8%;
 
-    --border: 195 100% 39%;
+    --border: 215 20% 22%;
 
   }
 
@@ -123,7 +123,7 @@
   }
 
   body {
-    @apply bg-transparent text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
