@@ -47,7 +47,8 @@ export const Projects = () => {
                 </h2>
 
                 <p className="text-center text-muted-forground mb-12 max-w-2xl mx-auto">
-                    Here are projects I have created in my spare time. I am only able to talk about work projects and not display them.
+                    Here are projects I have created in my spare time.
+                    I would be very happy to chat about the type of work I have done for my previous companies, as I am not able to display that here.
                 </p>
                 <Carousel
                     opts={{
