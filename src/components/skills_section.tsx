@@ -18,12 +18,14 @@ const skills = [
     { name: "C#", level: 55, category: "backend" },
 
 
-
+    { name: "three.js", level: 80, category: "tools" },
     { name: "Git/GitHub", level: 90, category: "tools" },
     { name: "Docker", level: 70, category: "tools" },
     { name: "Vercel", level: 85, category: "tools" },
     { name: "Clerk", level: 85, category: "tools" },
     { name: "Cursor", level: 95, category: "tools" },
+    { name: "Firebase", level: 80, category: "tools" },
+
 ];
 
 const categories = ["all", "frontend", "backend", "tools"];
