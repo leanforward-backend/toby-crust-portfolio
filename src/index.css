@@ -80,6 +80,11 @@
 }
 
 @layer base {
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
   :root {
     --background: linear-gradient(45deg, #ffffff, #fdfffd, #23a6d5, #8bcebe);
 

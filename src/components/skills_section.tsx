@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const skills = [
     { name: "React", level: 80, category: "frontend" },
@@ -13,17 +13,13 @@ const skills = [
     { name: "Convex", level: 90, category: "backend" },
     { name: "Node.js", level: 80, category: "backend" },
     { name: "PostgreSQL", level: 65, category: "backend" },
-    { name: "MongoDB", level: 65, category: "backend" },
     { name: "Python", level: 75, category: "backend" },
     { name: "C#", level: 55, category: "backend" },
-
 
     { name: "three.js", level: 80, category: "tools" },
     { name: "Git/GitHub", level: 90, category: "tools" },
     { name: "Docker", level: 70, category: "tools" },
     { name: "Vercel", level: 85, category: "tools" },
-    { name: "Clerk", level: 85, category: "tools" },
-    { name: "Cursor", level: 95, category: "tools" },
     { name: "Firebase", level: 80, category: "tools" },
 
 ];
