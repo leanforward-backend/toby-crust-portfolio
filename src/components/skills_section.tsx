@@ -7,7 +7,6 @@ const skills = [
     { name: "Tailwind CSS", level: 80, category: "frontend" },
     { name: "Shadcn", level: 95, category: "frontend" },
     { name: "JavaScript", level: 80, category: "frontend" },
-    { name: "HTML/CSS", level: 85, category: "frontend" },
     { name: "Next.js", level: 80, category: "frontend" },
 
     { name: "Convex", level: 90, category: "backend" },
@@ -19,6 +18,7 @@ const skills = [
     { name: "three.js", level: 80, category: "tools" },
     { name: "Git/GitHub", level: 90, category: "tools" },
     { name: "Docker", level: 70, category: "tools" },
+    { name: "amplify", level: 70, category: "tools" },
     { name: "Vercel", level: 85, category: "tools" },
     { name: "Firebase", level: 80, category: "tools" },
 
