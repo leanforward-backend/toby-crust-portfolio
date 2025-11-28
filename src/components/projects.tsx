@@ -9,58 +9,56 @@ import {
 const project = [
   {
     id: 1,
+    title: "type-tracker",
+    description: "Type Tracker app",
+    image: "/projects/type-tracker-ai.png",
+    demoUrl: "https://type-tracker.vercel.app/",
+  },
+  {
+    id: 2,
     title: "smart-bills",
     description: "Smart Bills app",
     image: "/projects/smart-bills-thumbnail.png",
     demoUrl: "/smart-bills.mkv",
   },
   {
-    id: 2,
+    id: 3,
     title: "Stocks",
     description: "World map stock viewer",
     image: "/projects/stocks-map.png",
     demoUrl: "https://simple-stocks.vercel.app/world",
   },
   {
-    id: 3,
+    id: 4,
     title: "Converse",
     description: "talk to AI in multiple different windows and settings",
     image: "/projects/converse.png",
-    demoUrl:
-      "https://leanforward-backend.github.io/game-of-life/build/web/index.html",
+    demoUrl: "https://github.com/leanforward-backend/converse",
   },
   {
-    id: 4,
+    id: 5,
     title: "Hay Concept Store",
     description: "ML/AR to controll products in store",
     image: "/projects/Ar-Hay.png",
     demoUrl: "https://tobycrust.github.io/HAY_Concept_Store/",
   },
   {
-    id: 5,
+    id: 6,
     title: "Gym Orm app",
     description: "Gym Orm app",
     image: "/projects/orm.png",
     demoUrl: "https://gym-orm.vercel.app/",
   },
   {
-    id: 6,
+    id: 7,
     title: "Game of Life",
     description: "Conway's Game of Life",
     image: "/projects/game-of-life.png",
     demoUrl:
       "https://leanforward-backend.github.io/game-of-life/build/web/index.html",
   },
-
   {
-    id: 7,
-    title: "Weather App",
-    description: "Weather App",
-    image: "/projects/weather-app.png",
-    demoUrl: "#",
-  },
-  {
-    id: 8,
+    id: 9,
     title: "Coding",
     description: "Learn to code",
     image: "/projects/Seagulls.png",
