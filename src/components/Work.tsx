@@ -1,4 +1,5 @@
 import { agentSteps, bigFreezeStats } from '../content'
+import { HoloboxVideo } from './HoloboxVideo'
 
 export function Work({ onPlayClip }: { onPlayClip: () => void }) {
   return (
@@ -12,16 +13,29 @@ export function Work({ onPlayClip }: { onPlayClip: () => void }) {
       </div>
 
       <article className="panel panel--feature" data-clip>
-        <div className="panel__frame">
-          <img className="panel__media" src="/images/big-freeze-beanie.jpg" alt="The Big Freeze digital beanie" loading="lazy" data-zoom />
-        </div>
-        <div className="panel__body">
-          <p className="panel__meta"><span className="panel__index">01</span>FightMND · built at Slik</p>
-          <h3 className="display-3">Big Freeze Digital Beanie</h3>
-          <p className="panel__text">
-            The purchase site for FightMND's digital beanie: checkout, Stripe payments and supporter data, built to
-            hold up when the campaign hit TV.
-          </p>
+        <a className="panel__frame" href="/images/big-freeze.jpg" target="_blank" rel="noreferrer" data-cursor="View">
+          <picture>
+            <source type="image/webp" srcSet="/images/big-freeze.webp" />
+            <img
+              className="panel__media"
+              src="/images/big-freeze.jpg"
+              width={1280}
+              height={720}
+              loading="lazy"
+              alt="Big Freeze Digital Beanie results: $2.5M revenue with 49% year-on-year growth, 59,085 transactions, 36,000 new supporters to FightMND, 57% website conversion to purchase, $1M of revenue from 44,062 supporters buying one digital beanie, and $189K of corporate box purchases. Opens full size."
+            />
+          </picture>
+        </a>
+        <div className="panel__body panel__body--split">
+          <div className="panel__intro">
+            <p className="panel__meta"><span className="panel__index">01</span>FightMND · built at Slik</p>
+            <h3 className="display-3">Big Freeze Digital Beanie</h3>
+            <p className="panel__text">
+              The purchase site for FightMND's digital beanie: checkout, Stripe payments and supporter data, built to
+              hold up when the campaign hit TV.
+            </p>
+            <p className="panel__meta">React · TypeScript · Stripe · Netlify</p>
+          </div>
           <dl className="stats">
             {bigFreezeStats.map((s) => (
               <div key={s.label} className="stat">
@@ -38,7 +52,6 @@ export function Work({ onPlayClip }: { onPlayClip: () => void }) {
               </div>
             ))}
           </dl>
-          <p className="panel__meta">React · TypeScript · Stripe · Netlify</p>
         </div>
       </article>
 
@@ -52,19 +65,15 @@ export function Work({ onPlayClip }: { onPlayClip: () => void }) {
           </p>
           <p className="panel__meta">Motion detection · Real-time 3D</p>
           <button type="button" className="pill pill--light play" onClick={onPlayClip} data-magnetic>
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-              <path d="M4 2.5v11l9-5.5z" />
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M2 6v4h3l4 3V3L5 6H2z" />
+              <path d="M11.5 5.5a3.5 3.5 0 0 1 0 5" />
             </svg>
-            Play the 30-second clip
+            Watch with sound
           </button>
         </div>
-        <div className="panel__pair">
-          <div className="panel__frame">
-            <img src="/images/holobox-idle.jpg" alt="The Holobox cabinet, with a person standing beside it" loading="lazy" style={{ objectPosition: '32% 50%' }} data-zoom />
-          </div>
-          <div className="panel__frame">
-            <img src="/images/holobox-game.jpg" alt="A game on the Holobox, controlled by body movement" loading="lazy" data-zoom />
-          </div>
+        <div className="panel__video">
+          <HoloboxVideo onOpen={onPlayClip} />
         </div>
       </article>
 

@@ -21,21 +21,6 @@ export const agentSteps = [
   'Pull request, I review and merge',
 ]
 
-export const toolkit = [
-  'AI agents',
-  'React',
-  'TypeScript',
-  'Python',
-  'Unity',
-  'C#',
-  'AR Foundation',
-  'Stripe',
-  'Slack API',
-  'GitHub Actions',
-  'Real-time 3D',
-  'BLE beacons',
-]
-
 export const experience = [
   {
     when: '2025 to now',

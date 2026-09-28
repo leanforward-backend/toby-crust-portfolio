@@ -470,35 +470,6 @@ ul {
   color: var(--muted);
 }
 
-/* ---------------------------------------------------------------- marquee */
-
-.marquee {
-  overflow: hidden;
-  padding: 28px 0 32px;
-  border-block: 1px solid var(--line);
-  background: var(--mist);
-  color: var(--ink);
-}
-
-.marquee__track {
-  display: flex;
-  width: max-content;
-}
-
-.marquee__item {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding-right: 40px;
-  font-family: var(--serif);
-  font-size: clamp(30px, 3.4vw, 46px);
-  white-space: nowrap;
-}
-
-.marquee__dot {
-  color: var(--accent);
-}
-
 /* ---------------------------------------------------------------- sections */
 
 .section {
@@ -537,10 +508,37 @@ ul {
   object-fit: cover;
 }
 
-.panel--feature {
+.panel--feature .panel__frame {
+  display: block;
+  overflow: hidden;
+}
+
+.panel--feature .panel__media {
+  transition: transform 1.2s var(--ease);
+}
+
+.panel--feature .panel__frame:hover .panel__media {
+  transform: scale(1.02);
+}
+
+.panel--feature .panel__media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Intro on the left, the counting stats on the right, under the full-width infographic. */
+.panel__body.panel__body--split {
   display: grid;
-  grid-template-columns: 6fr 5fr;
-  min-height: 660px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 32px 64px;
+}
+
+.panel__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .panel__body {
@@ -573,7 +571,6 @@ ul {
 }
 
 .stats {
-  margin-top: auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 26px 28px;
@@ -619,13 +616,29 @@ ul {
 .panel--holobox {
   display: grid;
   grid-template-columns: 5fr 7fr;
-  min-height: 640px;
 }
 
-.panel__pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px;
+.panel__video {
+  display: flex;
+  align-items: center;
+  padding: clamp(12px, 2vw, 28px);
+}
+
+.holobox-video {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+
+.holobox-video__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .play {
@@ -825,6 +838,98 @@ ul {
   font-size: 14px;
 }
 
+/* ---------------------------------------------------------------- cursor */
+
+/* GSAP positions the two wrappers (motion.ts); the circles are drawn by their pseudo-elements. */
+.cursor {
+  display: none;
+}
+
+.has-cursor .cursor {
+  display: block;
+}
+
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+/* The dialog sits in the top layer, above the custom cursor, so it keeps the normal one. */
+.has-cursor dialog,
+.has-cursor dialog * {
+  cursor: auto !important;
+}
+
+.cursor__ring,
+.cursor__dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.cursor__ring::before,
+.cursor__dot::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor__ring::before {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--ink);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transition: transform 0.5s var(--ease), background-color 0.3s, border-color 0.3s;
+}
+
+.cursor__ring.is-hover::before {
+  transform: translate(-50%, -50%) scale(1.7);
+  border-color: var(--accent);
+  background: rgba(106, 76, 147, 0.12);
+}
+
+.cursor__ring.is-label::before {
+  transform: translate(-50%, -50%) scale(2.5);
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.cursor__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.cursor__ring.is-label .cursor__label {
+  opacity: 1;
+}
+
+.cursor__dot::before {
+  width: 6px;
+  height: 6px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s var(--ease);
+}
+
+.cursor__dot.is-hidden::before {
+  transform: translate(-50%, -50%) scale(0);
+}
+
 /* ---------------------------------------------------------------- video */
 
 .video-dialog {
@@ -865,25 +970,16 @@ ul {
 /* ---------------------------------------------------------------- smaller screens */
 
 @media (max-width: 1000px) {
-  .panel--feature,
+  .panel__body.panel__body--split,
   .panel--holobox,
   .panel-row,
   .experience {
     grid-template-columns: 1fr;
   }
 
-  .panel--feature,
-  .panel--holobox {
-    min-height: 0;
-  }
-
-  .panel--feature .panel__frame {
-    aspect-ratio: 4 / 3;
-  }
-
-  .panel__pair {
+  .panel__video {
     order: -1;
-    aspect-ratio: 4 / 3;
+    padding-bottom: 0;
   }
 
   .experience {
