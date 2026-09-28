@@ -50,8 +50,8 @@ export function Hero() {
               a government heritage trail.
             </p>
             <div className="hero__actions hero__reveal">
-              <a href="#work" className="pill pill--light" data-magnetic>See my work</a>
-              <a href={`mailto:${contact.email}`} className="pill pill--ghost" data-magnetic>{contact.email}</a>
+              <a href="#work" className="pill pill--solid" data-magnetic>See my work</a>
+              <a href={`mailto:${contact.email}`} className="pill pill--glass" data-magnetic>{contact.email}</a>
             </div>
           </div>
           <ul className="hero__facts hero__reveal">

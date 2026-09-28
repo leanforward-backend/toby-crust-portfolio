@@ -1,15 +1,16 @@
 :root {
   color-scheme: only light;
-  --ink: #121829;
-  --ink-2: #2f3a52;
-  --muted: #5b6579;
-  --mist: #eef1f5;
+  --ink: #1f1a2e;
+  --ink-2: #3b3350;
+  --muted: #5a5169;
+  --mist: #efe9ee;
+  --veil: 244, 239, 245;
   --paper: #ffffff;
-  --accent: #b44d17;
-  --accent-bright: #f08a4b;
-  --peach: #f6e3d6;
-  --dusk: #1b2338;
-  --line: #d5dbe4;
+  --accent: #6a4c93;
+  --accent-bright: #f2b48f;
+  --peach: #f7e3d8;
+  --dusk: #2a2340;
+  --line: #d6cbd8;
   --serif: 'Instrument Serif', Georgia, serif;
   --sans: 'Geist', system-ui, -apple-system, sans-serif;
   --gutter: clamp(20px, 5.5vw, 80px);
@@ -146,6 +147,27 @@ ul {
   transition: background-color 0.35s, color 0.35s, border-color 0.35s;
 }
 
+.pill--solid {
+  background: var(--ink);
+  color: #fff;
+}
+
+.pill--solid:hover {
+  background: var(--accent);
+}
+
+.pill--glass {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: var(--ink);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.pill--glass:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
 .pill--light {
   background: #fff;
   color: var(--ink);
@@ -179,17 +201,16 @@ ul {
   gap: 24px;
   height: 84px;
   padding: 0 var(--gutter);
-  color: #fff;
+  color: var(--ink);
   border-bottom: 1px solid transparent;
   transition: background-color 0.5s, color 0.5s, border-color 0.5s, transform 0.6s var(--ease);
 }
 
 .nav.is-solid {
-  background: rgba(238, 241, 245, 0.8);
+  background: rgba(var(--veil), 0.8);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   backdrop-filter: blur(16px) saturate(1.4);
-  border-bottom-color: rgba(18, 24, 41, 0.08);
-  color: var(--ink);
+  border-bottom-color: rgba(31, 26, 46, 0.08);
 }
 
 .nav.is-tucked {
@@ -237,9 +258,9 @@ ul {
   min-height: 44px;
   padding: 0 20px;
   font-size: 15px;
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.45);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: var(--ink);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -247,6 +268,7 @@ ul {
 .is-solid .pill--nav {
   background: var(--ink);
   border-color: var(--ink);
+  color: #fff;
 }
 
 /* ---------------------------------------------------------------- painting */
@@ -282,8 +304,8 @@ ul {
 
 /* A striped copy of the water, sliding sideways, reads as a shimmer on the surface. */
 .painting__water {
-  clip-path: inset(75% 0 0 0);
-  opacity: 0.5;
+  clip-path: inset(72% 0 0 0);
+  opacity: 0.45;
   -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 3px, transparent 3px 9px);
   mask-image: repeating-linear-gradient(to bottom, #000 0 3px, transparent 3px 9px);
   animation: water 7s ease-in-out infinite, ripple 2.6s linear infinite;
@@ -292,8 +314,8 @@ ul {
 .painting__glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 40% 16% at 52% 64%, rgba(255, 150, 80, 0.5), rgba(255, 150, 80, 0) 70%);
-  mix-blend-mode: screen;
+  background: radial-gradient(ellipse 42% 18% at 55% 56%, rgba(255, 200, 170, 0.55), rgba(255, 200, 170, 0) 70%);
+  mix-blend-mode: soft-light;
   animation: glow 9s ease-in-out infinite;
 }
 
@@ -301,7 +323,7 @@ ul {
   position: absolute;
   inset: -120px;
   background: url('/images/grain.png') 0 0 / 256px 256px;
-  opacity: 0.08;
+  opacity: 0.05;
   mix-blend-mode: overlay;
   animation: grain 0.9s steps(1) infinite;
 }
@@ -347,8 +369,8 @@ ul {
   min-height: 680px;
   max-height: 1100px;
   overflow: hidden;
-  background: var(--ink);
-  color: #fff;
+  background: var(--mist);
+  color: var(--ink);
 }
 
 .hero__bg {
@@ -357,20 +379,20 @@ ul {
   will-change: transform;
 }
 
-/* Deepens the top of the sky and the water so white text reads, then melts into the band below. */
+/* A pale veil over the sky and water keeps dark text readable, then melts into the page below. */
 .hero__scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
     linear-gradient(180deg,
-      rgba(12, 17, 30, 0.6) 0%,
-      rgba(12, 17, 30, 0.22) 34%,
-      rgba(12, 17, 30, 0) 50%,
-      rgba(12, 17, 30, 0) 64%,
-      rgba(12, 17, 30, 0.5) 84%,
-      var(--ink) 100%),
-    linear-gradient(90deg, rgba(12, 17, 30, 0.35) 0%, rgba(12, 17, 30, 0) 55%);
+      rgba(var(--veil), 0.6) 0%,
+      rgba(var(--veil), 0.25) 34%,
+      rgba(var(--veil), 0) 50%,
+      rgba(var(--veil), 0) 66%,
+      rgba(var(--veil), 0.55) 84%,
+      var(--mist) 100%),
+    linear-gradient(90deg, rgba(var(--veil), 0.45) 0%, rgba(var(--veil), 0) 55%);
 }
 
 .hero__inner {
@@ -384,7 +406,7 @@ ul {
 
 .hero__eyebrow {
   margin-bottom: 26px;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--ink-2);
 }
 
 .hero__title {
@@ -394,11 +416,10 @@ ul {
   font-size: clamp(46px, 6.4vw, 92px);
   line-height: 0.98;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 40px rgba(12, 17, 30, 0.3);
 }
 
 .hero__title em {
-  color: #ffd9bf;
+  color: var(--accent);
 }
 
 .nowrap {
@@ -422,7 +443,7 @@ ul {
   max-width: 560px;
   font-size: clamp(17px, 1.4vw, 20px);
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--ink-2);
 }
 
 .hero__actions {
@@ -438,7 +459,7 @@ ul {
   list-style: none;
   font-size: 15px;
   text-align: right;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
 }
 
 .hero__facts span {
@@ -446,16 +467,17 @@ ul {
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted);
 }
 
 /* ---------------------------------------------------------------- marquee */
 
 .marquee {
   overflow: hidden;
-  padding: 30px 0 34px;
-  background: var(--ink);
-  color: rgba(255, 255, 255, 0.9);
+  padding: 28px 0 32px;
+  border-block: 1px solid var(--line);
+  background: var(--mist);
+  color: var(--ink);
 }
 
 .marquee__track {
@@ -474,7 +496,7 @@ ul {
 }
 
 .marquee__dot {
-  color: var(--accent-bright);
+  color: var(--accent);
 }
 
 /* ---------------------------------------------------------------- sections */
@@ -579,11 +601,11 @@ ul {
 
 .panel--dark {
   background: var(--dusk);
-  color: #f2f4f8;
+  color: #f4eff6;
 }
 
 .panel--dark .panel__meta {
-  color: #aeb7c8;
+  color: #bdb3cd;
 }
 
 .panel--dark .panel__index {
@@ -591,7 +613,7 @@ ul {
 }
 
 .panel--dark .panel__text {
-  color: #d5dbe6;
+  color: #ddd5e6;
 }
 
 .panel--holobox {
@@ -629,9 +651,9 @@ ul {
 .panel__placeholder {
   height: 300px;
   margin: 16px 16px 0;
-  border: 1px dashed #b9c2d0;
+  border: 1px dashed #c3b7cd;
   border-radius: 16px;
-  background: #f4f6f9;
+  background: #f6f1f6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -740,8 +762,8 @@ ul {
   min-height: 700px;
   overflow: hidden;
   border-radius: 32px 32px 0 0;
-  background: var(--ink);
-  color: #fff;
+  background: var(--mist);
+  color: var(--ink);
 }
 
 .contact__bg {
@@ -754,8 +776,8 @@ ul {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(12, 17, 30, 0.55) 0%, rgba(12, 17, 30, 0.1) 45%, rgba(12, 17, 30, 0.35) 80%, var(--ink) 100%),
-    linear-gradient(90deg, rgba(12, 17, 30, 0.35) 0%, rgba(12, 17, 30, 0) 60%);
+    linear-gradient(180deg, rgba(var(--veil), 0.55) 0%, rgba(var(--veil), 0.1) 45%, rgba(var(--veil), 0) 70%),
+    linear-gradient(90deg, rgba(var(--veil), 0.5) 0%, rgba(var(--veil), 0) 60%);
 }
 
 .contact__content {
@@ -783,7 +805,7 @@ ul {
 }
 
 .contact__email:hover {
-  color: #ffd9bf;
+  color: var(--accent);
 }
 
 .contact__links {
@@ -799,7 +821,7 @@ ul {
   min-height: 80px;
   padding: 0 var(--gutter);
   background: var(--ink);
-  color: #aeb7c8;
+  color: #bdb3cd;
   font-size: 14px;
 }
 
@@ -889,12 +911,12 @@ ul {
   /* The intro sits lower over the landmarks on phones, so the dark band starts higher. */
   .hero__scrim {
     background: linear-gradient(180deg,
-      rgba(12, 17, 30, 0.6) 0%,
-      rgba(12, 17, 30, 0.15) 30%,
-      rgba(12, 17, 30, 0) 40%,
-      rgba(12, 17, 30, 0.6) 58%,
-      rgba(12, 17, 30, 0.85) 76%,
-      var(--ink) 100%);
+      rgba(var(--veil), 0.6) 0%,
+      rgba(var(--veil), 0.15) 30%,
+      rgba(var(--veil), 0) 40%,
+      rgba(var(--veil), 0.65) 58%,
+      rgba(var(--veil), 0.88) 76%,
+      var(--mist) 100%);
   }
 
   .section {

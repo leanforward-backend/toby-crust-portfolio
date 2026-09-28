@@ -15,9 +15,9 @@ export function Contact() {
         <h2 className="contact__title" data-split>Let's talk.</h2>
         <a className="contact__email" href={`mailto:${contact.email}`} data-reveal>{contact.email}</a>
         <div className="contact__links" data-reveal>
-          <a className="pill pill--ghost" href={contact.linkedin} target="_blank" rel="noreferrer" data-magnetic>LinkedIn</a>
-          <a className="pill pill--ghost" href={contact.github} target="_blank" rel="noreferrer" data-magnetic>GitHub</a>
-          <a className="pill pill--light" href={contact.cv} download data-magnetic>Download CV</a>
+          <a className="pill pill--glass" href={contact.linkedin} target="_blank" rel="noreferrer" data-magnetic>LinkedIn</a>
+          <a className="pill pill--glass" href={contact.github} target="_blank" rel="noreferrer" data-magnetic>GitHub</a>
+          <a className="pill pill--solid" href={contact.cv} download data-magnetic>Download CV</a>
         </div>
       </div>
     </section>
