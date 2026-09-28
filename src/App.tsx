@@ -1,20 +1,27 @@
-import { Home } from "./pages/home"
-import { NotFound } from "./pages/notfound"
+import { useState } from 'react'
+import { Contact } from './components/Contact'
+import { Experience } from './components/Experience'
+import { Hero } from './components/Hero'
+import { VideoDialog } from './components/VideoDialog'
+import { Work } from './components/Work'
 
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
-function App() {
+export default function App() {
+  const [clipOpen, setClipOpen] = useState(false)
 
   return (
     <>
-    <BrowserRouter>
-    <Routes>
-      <Route index element={<Home/>} />
-      <Route path="*" element={<NotFound/>} />
-    </Routes>
-    </BrowserRouter>
+      <a href="#work" className="skip-link">Skip to work</a>
+      <Hero />
+      <main>
+        <Work onPlayClip={() => setClipOpen(true)} />
+        <Experience />
+        <Contact />
+      </main>
+      <footer className="footer">
+        <span>Toby Crust · Sydney</span>
+        <span>{new Date().getFullYear()}</span>
+      </footer>
+      <VideoDialog open={clipOpen} onClose={() => setClipOpen(false)} />
     </>
   )
 }
-
-export default App

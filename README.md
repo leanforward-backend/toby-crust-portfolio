@@ -1,20 +1,33 @@
-Going to be building my contracting portfolio.
+# Toby Crust — portfolio
 
-Goals for this project:
-Time limit - 3 days
-Embeded videos and animations
-Contact section - user can send me a contract request via / text message
-Requester will recive a confirmation email stating that I will get back to them
-Backend storage of who has sent the email and thair contact details
-Website scannable on QR
-Works on mobile
-Potentially a reactive codded background, such as game of life to add intrest and engagement
+One-page portfolio, live at <https://toby-crust-portfolio.vercel.app>. Vite, React and TypeScript with plain CSS, deployed on Vercel.
 
-Ideas:
-could have a request to cluade to generate some sort of code image each time the page loads for the background. you are able to then click to see what it has created with a button at the bottom of the page
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # production build in dist/
+npm run lint
+```
 
-Problems:
-Ran into some annoying email problems.
-Initally I was using resend, which I got working well, however the issue is that it only lets you send an email to your own email and not anyone else, unless you have a domain, but I don't want to spend money one that. This lead me through a rabbit hole of other email providers. Initally I used web3forms, but this had the same issue of only being able to send emails to yourself again. Next I used email.js. This does work with sending emails to other people, however they have a very stingy free tier of 200 emails. Therefore I will use react email in conjuction with email.js, so that I will recive and email when someone signs up and the first 200 will also recive a confirmation email. I am only going to uncomment the email.js part once all the other code is ready in order to not waste emails.
+## Where things live
 
-Used coolors for the colour theming, and descided to add a gradient to the lightmode background, to add more visual intrest.
+| Path | What |
+|---|---|
+| `src/content.ts` | Contact links, Big Freeze stats, the AI agent steps and the experience list |
+| `src/components/` | One component per section: `Hero`, `Work`, `Experience`, `Contact`, plus `Painting` (the animated harbour background) and `VideoDialog` (the Holobox clip) |
+| `src/styles.css` | All styles and animation. Colours and fonts are the custom properties at the top |
+| `public/images/` | Harbour painting (1280 and 2048 wide, WebP and JPEG), project images, grain texture, social preview image |
+| `public/video/` | Holobox clip and its poster frame |
+| `public/toby-crust-cv.pdf` | The CV behind every "Download CV" link. Copy `profiles/pdf/general.pdf` from the CV repo here after updating it |
+
+## The hero's movement
+
+All CSS, in `src/styles.css` under "painting":
+
+- **Drift:** the painting slowly zooms and pans over 40 seconds, then reverses.
+- **Water shimmer:** a striped copy of the bottom quarter of the painting slides sideways over the water.
+- **Horizon glow:** a warm light near the horizon slowly brightens and fades.
+- **Grain:** a tiled noise texture jumps position several times a second.
+- **Mouse tilt:** on desktop the painting leans a few pixels away from the cursor (`Hero.tsx`).
+
+The animations pause when their section is off screen, and all of it switches off for visitors with reduced motion turned on.
