@@ -95,6 +95,7 @@ function heroIntro(q: Query) {
     mask: 'lines',
     autoSplit: true,
     onSplit(self) {
+      roomForDescenders(self.masks)
       gsap.set(title, { autoAlpha: 1 })
       return gsap.from(self.lines, { yPercent: 110, duration: 1.5, stagger: 0.12, ease: 'expo.out', delay: 0.45 })
     },
@@ -119,6 +120,15 @@ function heroScroll(q: Query) {
   })
 }
 
+/**
+ * SplitText's line masks are exactly one line-height tall, which on tight display type clips the tails of
+ * letters like p, g and j. Padding each mask, with a matching negative margin, gives them room without
+ * moving anything.
+ */
+function roomForDescenders(masks: Element[]) {
+  gsap.set(masks, { paddingTop: '0.08em', paddingBottom: '0.2em', marginTop: '-0.08em', marginBottom: '-0.2em' })
+}
+
 function splitHeadings(q: Query) {
   q('[data-split]')
     .filter((el) => !el.classList.contains('hero__title'))
@@ -128,6 +138,7 @@ function splitHeadings(q: Query) {
         mask: 'lines',
         autoSplit: true,
         onSplit(self) {
+          roomForDescenders(self.masks)
           gsap.set(el, { autoAlpha: 1 })
           return gsap.from(self.lines, {
             yPercent: 110,
