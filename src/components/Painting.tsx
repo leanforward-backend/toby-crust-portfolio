@@ -6,7 +6,7 @@ type PaintingProps = {
 }
 
 const srcSet = (ext: string) =>
-  `/images/harbour-dusk-1280.${ext} 1280w, /images/harbour-dusk-2048.${ext} 2048w`
+  `/images/harbour-1280.${ext} 1280w, /images/harbour-2048.${ext} 2048w`
 
 function Harbour({ className, position }: { className: string; position?: string }) {
   return (
@@ -14,7 +14,7 @@ function Harbour({ className, position }: { className: string; position?: string
       <source type="image/webp" srcSet={srcSet('webp')} sizes="100vw" />
       <img
         className={className}
-        src="/images/harbour-dusk-2048.jpg"
+        src="/images/harbour-2048.jpg"
         srcSet={srcSet('jpg')}
         sizes="100vw"
         alt=""

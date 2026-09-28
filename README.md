@@ -20,14 +20,20 @@ npm run lint
 | `public/video/` | Holobox clip and its poster frame |
 | `public/toby-crust-cv.pdf` | The CV behind every "Download CV" link. Copy `profiles/pdf/general.pdf` from the CV repo here after updating it |
 
-## The hero's movement
+## Motion
 
-All CSS, in `src/styles.css` under "painting":
+**GSAP** (`src/motion.ts`, with ScrollTrigger and SplitText) handles everything tied to loading and scrolling. Markup opts in with data attributes, listed at the top of that file:
 
-- **Drift:** the painting slowly zooms and pans over 40 seconds, then reverses.
-- **Water shimmer:** a striped copy of the bottom quarter of the painting slides sideways over the water.
-- **Horizon glow:** a warm light near the horizon slowly brightens and fades.
-- **Grain:** a tiled noise texture jumps position several times a second.
-- **Mouse tilt:** on desktop the painting leans a few pixels away from the cursor (`Hero.tsx`).
+- **Intro:** the painting settles from a zoom, the headline rises in line by line, then the intro text and nav.
+- **Hero scroll:** the painting sinks and the text lifts away as you scroll past.
+- **Headings:** section headings reveal line by line when they come into view.
+- **Panels:** the two big project panels open out from a smaller rounded frame, and their images settle from a slight zoom.
+- **Numbers:** the Big Freeze stats count up.
+- **Details:** the agent flow steps in one at a time, experience rows draw their divider lines, the skills band speeds up with scroll speed, and buttons lean towards the cursor on desktop.
+- **Nav:** turns solid once past the hero, and tucks away while scrolling down.
 
-The animations pause when their section is off screen, and all of it switches off for visitors with reduced motion turned on.
+**CSS** (`src/styles.css`, under "painting") runs the harbour image's continuous loops: a slow drift and zoom, a shimmer on the water, a pulsing horizon glow and film grain. On desktop the image also leans slightly away from the cursor (`Hero.tsx`). These loops pause when their section is off screen.
+
+Visitors with reduced motion turned on get the finished page with none of the above.
+
+The page declares itself light-only (`color-scheme: only light`), so browsers with forced dark mode don't invert its colours.

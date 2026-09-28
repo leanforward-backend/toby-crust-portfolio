@@ -5,11 +5,12 @@ export const contact = {
   cv: '/toby-crust-cv.pdf',
 }
 
+/** `value` is what shows without JavaScript; the rest drives the count-up. */
 export const bigFreezeStats = [
-  { value: '$2.5M', label: 'revenue, up 49% on last year' },
-  { value: '57%', label: 'of visitors bought' },
-  { value: '59,085', label: 'transactions' },
-  { value: '36,000', label: 'new supporters' },
+  { value: '$2.5M', to: 2.5, prefix: '$', suffix: 'M', decimals: 1, label: 'revenue, up 49% on last year' },
+  { value: '57%', to: 57, prefix: '', suffix: '%', decimals: 0, label: 'of visitors bought' },
+  { value: '59,085', to: 59085, prefix: '', suffix: '', decimals: 0, label: 'transactions' },
+  { value: '36,000', to: 36000, prefix: '', suffix: '', decimals: 0, label: 'new supporters' },
 ]
 
 export const agentSteps = [
@@ -18,6 +19,21 @@ export const agentSteps = [
   'Fresh VM applies it',
   'Tests run automatically',
   'Pull request, I review and merge',
+]
+
+export const toolkit = [
+  'AI agents',
+  'React',
+  'TypeScript',
+  'Python',
+  'Unity',
+  'C#',
+  'AR Foundation',
+  'Stripe',
+  'Slack API',
+  'GitHub Actions',
+  'Real-time 3D',
+  'BLE beacons',
 ]
 
 export const experience = [

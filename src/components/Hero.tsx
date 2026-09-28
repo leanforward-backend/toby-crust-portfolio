@@ -30,44 +30,36 @@ export function Hero() {
       className={`hero${inView ? '' : ' is-paused'}`}
       onPointerMove={onPointerMove}
     >
-      <Painting water />
-      <div className="hero__fade" />
-
-      <header className="nav">
-        <a href="#top" className="nav__name">Toby Crust</a>
-        <nav aria-label="Main" className="nav__links">
-          <a href="#work" className="nav__link">Work</a>
-          <a href="#experience" className="nav__link">Experience</a>
-          <a href="#contact" className="nav__link">Contact</a>
-          <a href={contact.cv} className="pill pill--glass" download>Download CV</a>
-        </nav>
-      </header>
-
-      <div className="hero__content">
-        <p className="eyebrow rise">Software engineer · Sydney</p>
-        <h1 className="hero__title rise" style={{ animationDelay: '0.12s' }}>
-          I build software that works <em>out in the world</em>.
-        </h1>
-        <p className="hero__lede rise" style={{ animationDelay: '0.24s' }}>
-          AI workflows, web products and real-time experiences, from a fundraising site that took $2.5M
-          to AR on a government heritage trail.
-        </p>
-        <div className="hero__actions rise" style={{ animationDelay: '0.36s' }}>
-          <a href="#work" className="pill pill--solid">See my work</a>
-          <a href={`mailto:${contact.email}`} className="pill pill--glass">{contact.email}</a>
-        </div>
+      <div className="hero__bg">
+        <Painting water />
       </div>
+      <div className="hero__scrim" />
 
-      <div className="hero__meta">
-        <ul className="hero__facts">
-          <li><strong>Now</strong> · Software Engineer at Slik</li>
-          <li><strong>Before</strong> · Fabra, Bardon Design</li>
-          <li><strong>Open to</strong> · Engineering roles in Sydney</li>
-        </ul>
-        <a href="#work" className="scroll-cue">
-          Scroll
-          <span className="scroll-cue__track"><span className="scroll-cue__bar" /></span>
-        </a>
+      <div className="hero__inner">
+        <div className="hero__top">
+          <p className="eyebrow hero__eyebrow">Software engineer · Sydney</p>
+          <h1 className="hero__title" data-split>
+            I build software that works <span className="nowrap"><em>out in the world</em>.</span>
+          </h1>
+        </div>
+
+        <div className="hero__bottom">
+          <div className="hero__intro">
+            <p className="hero__lede hero__reveal">
+              AI workflows, web products and real-time experiences, from a fundraising site that took $2.5M to AR on
+              a government heritage trail.
+            </p>
+            <div className="hero__actions hero__reveal">
+              <a href="#work" className="pill pill--light" data-magnetic>See my work</a>
+              <a href={`mailto:${contact.email}`} className="pill pill--ghost" data-magnetic>{contact.email}</a>
+            </div>
+          </div>
+          <ul className="hero__facts hero__reveal">
+            <li><span>Now</span>Software Engineer at Slik</li>
+            <li><span>Before</span>Fabra, Bardon Design</li>
+            <li><span>Open to</span>Engineering roles in Sydney</li>
+          </ul>
+        </div>
       </div>
     </section>
   )
