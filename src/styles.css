@@ -484,7 +484,8 @@ ul {
   padding-bottom: 16px;
 }
 
-.work {
+.work,
+.side {
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -548,11 +549,6 @@ ul {
   padding: clamp(28px, 4vw, 56px);
 }
 
-.panel__body--card {
-  gap: 14px;
-  padding: 32px clamp(24px, 3vw, 40px) 40px;
-}
-
 .panel__meta {
   font-size: 14px;
   color: var(--muted);
@@ -574,6 +570,10 @@ ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 26px 28px;
+}
+
+.stats--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .stat {
@@ -613,7 +613,7 @@ ul {
   color: #ddd5e6;
 }
 
-.panel--holobox {
+.panel--side {
   display: grid;
   grid-template-columns: 5fr 7fr;
 }
@@ -646,40 +646,46 @@ ul {
   align-self: flex-start;
 }
 
-.panel-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-}
-
-.panel--card {
-  display: flex;
-  flex-direction: column;
-}
-
 .panel--peach {
   background: var(--peach);
 }
 
-.panel__placeholder {
-  height: 300px;
-  margin: 16px 16px 0;
-  border: 1px dashed #c3b7cd;
-  border-radius: 16px;
-  background: #f6f1f6;
+/* App screens across the top of the panel, in the order a visitor meets them. */
+.phones {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 24px;
-  text-align: center;
-  font-size: 15px;
-  color: var(--muted);
+  gap: clamp(12px, 2vw, 28px);
+  padding: clamp(28px, 4vw, 56px);
+  background: linear-gradient(160deg, #e9e0ee, var(--peach));
+}
+
+.phones__item {
+  flex: 1 1 0;
+  max-width: 210px;
+  aspect-ratio: 480 / 1040;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(31, 26, 46, 0.2);
+  transition: transform 0.6s var(--ease);
+}
+
+.phones__item:nth-child(even) {
+  transform: translateY(20px);
+}
+
+.phones__item:hover {
+  transform: translateY(-8px);
+}
+
+.phones__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .flow {
-  height: 300px;
-  margin: 16px 16px 0;
-  padding: 0 clamp(20px, 3.5vw, 48px);
+  margin: clamp(12px, 2vw, 28px);
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 3.5vw, 48px);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.55);
   list-style: none;
@@ -713,6 +719,53 @@ ul {
 .flow__step:last-child .flow__label {
   background: var(--ink);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------- side projects */
+
+/* Fits two cards across now and three once there is a third project. */
+.side__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 32px;
+}
+
+.side-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-card__shot {
+  display: block;
+  margin: 16px 16px 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.side-card__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 1.2s var(--ease);
+}
+
+.side-card__shot:hover img {
+  transform: scale(1.02);
+}
+
+.side-card__body {
+  flex: 1;
+  gap: 14px;
+  padding: 28px clamp(24px, 3vw, 40px) 36px;
+}
+
+/* Pushed to the bottom so the buttons line up across cards. */
+.side-card__link {
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 /* ---------------------------------------------------------------- experience */
@@ -971,8 +1024,7 @@ ul {
 
 @media (max-width: 1000px) {
   .panel__body.panel__body--split,
-  .panel--holobox,
-  .panel-row,
+  .panel--side,
   .experience {
     grid-template-columns: 1fr;
   }
@@ -980,6 +1032,11 @@ ul {
   .panel__video {
     order: -1;
     padding-bottom: 0;
+  }
+
+  .flow {
+    order: -1;
+    margin-bottom: 0;
   }
 
   .experience {
@@ -994,6 +1051,23 @@ ul {
 @media (max-width: 720px) {
   .nav {
     height: 72px;
+  }
+
+  /* Five screens are too small side by side here, so the strip scrolls. */
+  .phones {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* Narrow enough that the third screen peeks in, hinting at the scroll. */
+  .phones__item {
+    flex: 0 0 130px;
+    scroll-snap-align: center;
+  }
+
+  .phones__item:nth-child(even) {
+    transform: none;
   }
 
   .nav__link {
@@ -1052,5 +1126,10 @@ ul {
 
   .painting__tilt {
     transform: none;
+  }
+
+  .phones__item,
+  .side-card__shot img {
+    transition: none;
   }
 }

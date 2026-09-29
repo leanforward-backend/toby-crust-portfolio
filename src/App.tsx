@@ -4,6 +4,7 @@ import { Cursor } from './components/Cursor'
 import { Experience } from './components/Experience'
 import { Hero } from './components/Hero'
 import { Nav } from './components/Nav'
+import { SideProjects } from './components/SideProjects'
 import { VideoDialog } from './components/VideoDialog'
 import { Work } from './components/Work'
 import { useSiteMotion } from './motion'
@@ -20,6 +21,7 @@ export default function App() {
       <Hero />
       <main>
         <Work onPlayClip={() => setClipOpen(true)} />
+        <SideProjects />
         <Experience />
         <Contact />
       </main>

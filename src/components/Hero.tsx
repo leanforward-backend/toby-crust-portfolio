@@ -46,7 +46,7 @@ export function Hero() {
         <div className="hero__bottom">
           <div className="hero__intro">
             <p className="hero__lede hero__reveal">
-              AI workflows, web products and real-time experiences, from a fundraising site that took $2.5M to AR on
+              AI workflows, web products and real-time experiences, from a fundraising site that generated $2.5M to AR on
               a government heritage trail.
             </p>
             <div className="hero__actions hero__reveal">
