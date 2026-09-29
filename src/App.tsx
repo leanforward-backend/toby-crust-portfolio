@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react'
 import { Contact } from './components/Contact'
+import { Cursor } from './components/Cursor'
 import { Experience } from './components/Experience'
 import { Hero } from './components/Hero'
-import { Marquee } from './components/Marquee'
 import { Nav } from './components/Nav'
+import { SideProjects } from './components/SideProjects'
 import { VideoDialog } from './components/VideoDialog'
 import { Work } from './components/Work'
 import { useSiteMotion } from './motion'
@@ -19,8 +20,8 @@ export default function App() {
       <Nav />
       <Hero />
       <main>
-        <Marquee />
         <Work onPlayClip={() => setClipOpen(true)} />
+        <SideProjects />
         <Experience />
         <Contact />
       </main>
@@ -29,6 +30,7 @@ export default function App() {
         <span>{new Date().getFullYear()}</span>
       </footer>
       <VideoDialog open={clipOpen} onClose={() => setClipOpen(false)} />
+      <Cursor />
     </div>
   )
 }

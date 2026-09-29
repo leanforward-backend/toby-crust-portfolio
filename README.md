@@ -16,8 +16,8 @@ npm run lint
 | `src/content.ts` | Contact links, Big Freeze stats, the AI agent steps and the experience list |
 | `src/components/` | One component per section: `Hero`, `Work`, `Experience`, `Contact`, plus `Painting` (the animated harbour background) and `VideoDialog` (the Holobox clip) |
 | `src/styles.css` | All styles and animation. Colours and fonts are the custom properties at the top |
-| `public/images/` | Harbour painting (1280 and 2048 wide, WebP and JPEG), project images, grain texture, social preview image |
-| `public/video/` | Holobox clip and its poster frame |
+| `public/images/` | Harbour watercolour (1280 and 2048 wide, WebP and JPEG), Big Freeze infographic, grain texture, social preview image |
+| `public/video/` | Holobox clip and its poster frame. It autoplays muted while on screen (`HoloboxVideo.tsx`); clicking it opens the version with sound |
 | `public/toby-crust-cv.pdf` | The CV behind every "Download CV" link. Copy `profiles/pdf/general.pdf` from the CV repo here after updating it |
 
 ## Motion
@@ -27,9 +27,10 @@ npm run lint
 - **Intro:** the painting settles from a zoom, the headline rises in line by line, then the intro text and nav.
 - **Hero scroll:** the painting sinks and the text lifts away as you scroll past.
 - **Headings:** section headings reveal line by line when they come into view.
-- **Panels:** the two big project panels open out from a smaller rounded frame, and their images settle from a slight zoom.
+- **Panels:** the two big project panels open out from a smaller rounded frame.
 - **Numbers:** the Big Freeze stats count up.
-- **Details:** the agent flow steps in one at a time, experience rows draw their divider lines, the skills band speeds up with scroll speed, and buttons lean towards the cursor on desktop.
+- **Details:** the agent flow steps in one at a time, experience rows draw their divider lines, and buttons lean towards the cursor on desktop.
+- **Cursor:** on desktop, a dot with a trailing ring replaces the pointer. The ring grows over links and buttons, and shows a label over anything with `data-cursor` ("Watch" on the Holobox video, "View" on the Big Freeze infographic).
 - **Nav:** turns solid once past the hero, and tucks away while scrolling down.
 
 **CSS** (`src/styles.css`, under "painting") runs the harbour image's continuous loops: a slow drift and zoom, a shimmer on the water, a pulsing horizon glow and film grain. On desktop the image also leans slightly away from the cursor (`Hero.tsx`). These loops pause when their section is off screen.

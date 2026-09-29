@@ -470,35 +470,6 @@ ul {
   color: var(--muted);
 }
 
-/* ---------------------------------------------------------------- marquee */
-
-.marquee {
-  overflow: hidden;
-  padding: 28px 0 32px;
-  border-block: 1px solid var(--line);
-  background: var(--mist);
-  color: var(--ink);
-}
-
-.marquee__track {
-  display: flex;
-  width: max-content;
-}
-
-.marquee__item {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding-right: 40px;
-  font-family: var(--serif);
-  font-size: clamp(30px, 3.4vw, 46px);
-  white-space: nowrap;
-}
-
-.marquee__dot {
-  color: var(--accent);
-}
-
 /* ---------------------------------------------------------------- sections */
 
 .section {
@@ -513,7 +484,8 @@ ul {
   padding-bottom: 16px;
 }
 
-.work {
+.work,
+.side {
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -537,10 +509,37 @@ ul {
   object-fit: cover;
 }
 
-.panel--feature {
+.panel--feature .panel__frame {
+  display: block;
+  overflow: hidden;
+}
+
+.panel--feature .panel__media {
+  transition: transform 1.2s var(--ease);
+}
+
+.panel--feature .panel__frame:hover .panel__media {
+  transform: scale(1.02);
+}
+
+.panel--feature .panel__media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Intro on the left, the counting stats on the right, under the full-width infographic. */
+.panel__body.panel__body--split {
   display: grid;
-  grid-template-columns: 6fr 5fr;
-  min-height: 660px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 32px 64px;
+}
+
+.panel__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .panel__body {
@@ -548,11 +547,6 @@ ul {
   flex-direction: column;
   gap: 18px;
   padding: clamp(28px, 4vw, 56px);
-}
-
-.panel__body--card {
-  gap: 14px;
-  padding: 32px clamp(24px, 3vw, 40px) 40px;
 }
 
 .panel__meta {
@@ -573,10 +567,13 @@ ul {
 }
 
 .stats {
-  margin-top: auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 26px 28px;
+}
+
+.stats--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .stat {
@@ -616,16 +613,32 @@ ul {
   color: #ddd5e6;
 }
 
-.panel--holobox {
+.panel--side {
   display: grid;
   grid-template-columns: 5fr 7fr;
-  min-height: 640px;
 }
 
-.panel__pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px;
+.panel__video {
+  display: flex;
+  align-items: center;
+  padding: clamp(12px, 2vw, 28px);
+}
+
+.holobox-video {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+
+.holobox-video__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .play {
@@ -633,40 +646,46 @@ ul {
   align-self: flex-start;
 }
 
-.panel-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-}
-
-.panel--card {
-  display: flex;
-  flex-direction: column;
-}
-
 .panel--peach {
   background: var(--peach);
 }
 
-.panel__placeholder {
-  height: 300px;
-  margin: 16px 16px 0;
-  border: 1px dashed #c3b7cd;
-  border-radius: 16px;
-  background: #f6f1f6;
+/* App screens across the top of the panel, in the order a visitor meets them. */
+.phones {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 24px;
-  text-align: center;
-  font-size: 15px;
-  color: var(--muted);
+  gap: clamp(12px, 2vw, 28px);
+  padding: clamp(28px, 4vw, 56px);
+  background: linear-gradient(160deg, #e9e0ee, var(--peach));
+}
+
+.phones__item {
+  flex: 1 1 0;
+  max-width: 210px;
+  aspect-ratio: 480 / 1040;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(31, 26, 46, 0.2);
+  transition: transform 0.6s var(--ease);
+}
+
+.phones__item:nth-child(even) {
+  transform: translateY(20px);
+}
+
+.phones__item:hover {
+  transform: translateY(-8px);
+}
+
+.phones__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .flow {
-  height: 300px;
-  margin: 16px 16px 0;
-  padding: 0 clamp(20px, 3.5vw, 48px);
+  margin: clamp(12px, 2vw, 28px);
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 3.5vw, 48px);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.55);
   list-style: none;
@@ -700,6 +719,53 @@ ul {
 .flow__step:last-child .flow__label {
   background: var(--ink);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------- side projects */
+
+/* Fits two cards across now and three once there is a third project. */
+.side__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 32px;
+}
+
+.side-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-card__shot {
+  display: block;
+  margin: 16px 16px 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.side-card__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 1.2s var(--ease);
+}
+
+.side-card__shot:hover img {
+  transform: scale(1.02);
+}
+
+.side-card__body {
+  flex: 1;
+  gap: 14px;
+  padding: 28px clamp(24px, 3vw, 40px) 36px;
+}
+
+/* Pushed to the bottom so the buttons line up across cards. */
+.side-card__link {
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 /* ---------------------------------------------------------------- experience */
@@ -825,6 +891,98 @@ ul {
   font-size: 14px;
 }
 
+/* ---------------------------------------------------------------- cursor */
+
+/* GSAP positions the two wrappers (motion.ts); the circles are drawn by their pseudo-elements. */
+.cursor {
+  display: none;
+}
+
+.has-cursor .cursor {
+  display: block;
+}
+
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+/* The dialog sits in the top layer, above the custom cursor, so it keeps the normal one. */
+.has-cursor dialog,
+.has-cursor dialog * {
+  cursor: auto !important;
+}
+
+.cursor__ring,
+.cursor__dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.cursor__ring::before,
+.cursor__dot::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor__ring::before {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--ink);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transition: transform 0.5s var(--ease), background-color 0.3s, border-color 0.3s;
+}
+
+.cursor__ring.is-hover::before {
+  transform: translate(-50%, -50%) scale(1.7);
+  border-color: var(--accent);
+  background: rgba(106, 76, 147, 0.12);
+}
+
+.cursor__ring.is-label::before {
+  transform: translate(-50%, -50%) scale(2.5);
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: none;
+}
+
+.cursor__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.cursor__ring.is-label .cursor__label {
+  opacity: 1;
+}
+
+.cursor__dot::before {
+  width: 6px;
+  height: 6px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s var(--ease);
+}
+
+.cursor__dot.is-hidden::before {
+  transform: translate(-50%, -50%) scale(0);
+}
+
 /* ---------------------------------------------------------------- video */
 
 .video-dialog {
@@ -865,25 +1023,20 @@ ul {
 /* ---------------------------------------------------------------- smaller screens */
 
 @media (max-width: 1000px) {
-  .panel--feature,
-  .panel--holobox,
-  .panel-row,
+  .panel__body.panel__body--split,
+  .panel--side,
   .experience {
     grid-template-columns: 1fr;
   }
 
-  .panel--feature,
-  .panel--holobox {
-    min-height: 0;
-  }
-
-  .panel--feature .panel__frame {
-    aspect-ratio: 4 / 3;
-  }
-
-  .panel__pair {
+  .panel__video {
     order: -1;
-    aspect-ratio: 4 / 3;
+    padding-bottom: 0;
+  }
+
+  .flow {
+    order: -1;
+    margin-bottom: 0;
   }
 
   .experience {
@@ -898,6 +1051,23 @@ ul {
 @media (max-width: 720px) {
   .nav {
     height: 72px;
+  }
+
+  /* Five screens are too small side by side here, so the strip scrolls. */
+  .phones {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* Narrow enough that the third screen peeks in, hinting at the scroll. */
+  .phones__item {
+    flex: 0 0 130px;
+    scroll-snap-align: center;
+  }
+
+  .phones__item:nth-child(even) {
+    transform: none;
   }
 
   .nav__link {
@@ -956,5 +1126,10 @@ ul {
 
   .painting__tilt {
     transform: none;
+  }
+
+  .phones__item,
+  .side-card__shot img {
+    transition: none;
   }
 }

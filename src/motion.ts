@@ -20,6 +20,7 @@ type Query = (selector: string) => HTMLElement[]
  * - [data-zoom]    image that settles from a slight zoom while scrolled past
  * - [data-count]   number that counts up (with data-prefix, data-suffix, data-decimals)
  * - [data-magnetic] button that leans towards the cursor
+ * - [data-cursor]  label the custom cursor shows while over the element (e.g. "Watch")
  */
 export function useSiteMotion(root: RefObject<HTMLElement | null>) {
   useGSAP(
@@ -41,12 +42,18 @@ export function useSiteMotion(root: RefObject<HTMLElement | null>) {
         panels(q)
         flow(q)
         timeline(q)
-        marquee(q)
         contactParallax(q)
         return counters(q)
       })
 
-      mm.add(`${FULL_MOTION} and ${FINE_POINTER}`, () => magnetic(q))
+      mm.add(`${FULL_MOTION} and ${FINE_POINTER}`, () => {
+        const unmagnet = magnetic(q)
+        const uncursor = cursor(q)
+        return () => {
+          unmagnet()
+          uncursor()
+        }
+      })
     },
     { scope: root },
   )
@@ -88,6 +95,7 @@ function heroIntro(q: Query) {
     mask: 'lines',
     autoSplit: true,
     onSplit(self) {
+      roomForDescenders(self.masks)
       gsap.set(title, { autoAlpha: 1 })
       return gsap.from(self.lines, { yPercent: 110, duration: 1.5, stagger: 0.12, ease: 'expo.out', delay: 0.45 })
     },
@@ -112,6 +120,15 @@ function heroScroll(q: Query) {
   })
 }
 
+/**
+ * SplitText's line masks are exactly one line-height tall, which on tight display type clips the tails of
+ * letters like p, g and j. Padding each mask, with a matching negative margin, gives them room without
+ * moving anything.
+ */
+function roomForDescenders(masks: Element[]) {
+  gsap.set(masks, { paddingTop: '0.08em', paddingBottom: '0.2em', marginTop: '-0.08em', marginBottom: '-0.2em' })
+}
+
 function splitHeadings(q: Query) {
   q('[data-split]')
     .filter((el) => !el.classList.contains('hero__title'))
@@ -121,6 +138,7 @@ function splitHeadings(q: Query) {
         mask: 'lines',
         autoSplit: true,
         onSplit(self) {
+          roomForDescenders(self.masks)
           gsap.set(el, { autoAlpha: 1 })
           return gsap.from(self.lines, {
             yPercent: 110,
@@ -214,28 +232,6 @@ function timeline(q: Query) {
   })
 }
 
-/** Endless skills band that speeds up with scroll velocity. */
-function marquee(q: Query) {
-  const [band] = q('.marquee')
-  const [track] = q('.marquee__track')
-  if (!band || !track) return
-
-  const loop = gsap.to(track, { xPercent: -50, duration: 45, ease: 'none', repeat: -1 })
-  ScrollTrigger.create({
-    trigger: band,
-    start: 'top bottom',
-    end: 'bottom top',
-    onUpdate: (self) => {
-      const boost = 1 + Math.min(Math.abs(self.getVelocity()) / 250, 6)
-      gsap.to(loop, {
-        timeScale: boost,
-        duration: 0.2,
-        overwrite: true,
-        onComplete: () => void gsap.to(loop, { timeScale: 1, duration: 1.4, ease: 'power2.out' }),
-      })
-    },
-  })
-}
 
 function contactParallax(q: Query) {
   const [contact] = q('.contact')
@@ -268,4 +264,69 @@ function magnetic(q: Query) {
     }
   })
   return () => cleanups.forEach((fn) => fn())
+}
+
+/** A dot that tracks the pointer and a ring that trails it, growing over anything clickable. */
+function cursor(q: Query) {
+  const [dot] = q('.cursor__dot')
+  const [ring] = q('.cursor__ring')
+  const [label] = q('.cursor__label')
+  if (!dot || !ring || !label) return () => {}
+
+  const root = document.documentElement
+  root.classList.add('has-cursor')
+  gsap.set([dot, ring], { xPercent: -50, yPercent: -50, autoAlpha: 0 })
+
+  const dotX = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power3.out' })
+  const dotY = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power3.out' })
+  const ringX = gsap.quickTo(ring, 'x', { duration: 0.5, ease: 'power3.out' })
+  const ringY = gsap.quickTo(ring, 'y', { duration: 0.5, ease: 'power3.out' })
+  let shown = false
+
+  const move = (e: PointerEvent) => {
+    if (e.pointerType !== 'mouse') return
+    if (!shown) {
+      shown = true
+      gsap.set([dot, ring], { x: e.clientX, y: e.clientY })
+      gsap.to([dot, ring], { autoAlpha: 1, duration: 0.3 })
+    }
+    dotX(e.clientX)
+    dotY(e.clientY)
+    ringX(e.clientX)
+    ringY(e.clientY)
+  }
+
+  const setMode = (target: EventTarget | null) => {
+    const el = target instanceof Element ? target : null
+    const labelled = el?.closest<HTMLElement>('[data-cursor]')
+    const clickable = el?.closest('a, button, summary, [role="button"]')
+    const text = labelled?.dataset.cursor ?? ''
+    label.textContent = text
+    ring.classList.toggle('is-label', Boolean(text))
+    ring.classList.toggle('is-hover', !text && Boolean(clickable))
+    dot.classList.toggle('is-hidden', Boolean(text || clickable))
+  }
+
+  const over = (e: PointerEvent) => setMode(e.target)
+  const down = () => gsap.to(ring, { scale: 0.82, duration: 0.2 })
+  const up = () => gsap.to(ring, { scale: 1, duration: 0.4, ease: 'back.out(3)' })
+  const leave = () => {
+    shown = false
+    gsap.to([dot, ring], { autoAlpha: 0, duration: 0.3 })
+  }
+
+  window.addEventListener('pointermove', move)
+  document.addEventListener('pointerover', over)
+  window.addEventListener('pointerdown', down)
+  window.addEventListener('pointerup', up)
+  document.documentElement.addEventListener('pointerleave', leave)
+
+  return () => {
+    root.classList.remove('has-cursor')
+    window.removeEventListener('pointermove', move)
+    document.removeEventListener('pointerover', over)
+    window.removeEventListener('pointerdown', down)
+    window.removeEventListener('pointerup', up)
+    document.documentElement.removeEventListener('pointerleave', leave)
+  }
 }
