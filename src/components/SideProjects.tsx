@@ -1,4 +1,22 @@
 import { sideProjects } from '../content'
+import { useAutoplay } from '../useAutoplay'
+
+function ShotVideo({ name, label }: { name: string; label: string }) {
+  const video = useAutoplay()
+
+  return (
+    <video
+      ref={video}
+      src={`/video/${name}.mp4`}
+      poster={`/video/${name}-poster.jpg`}
+      aria-label={label}
+      muted
+      loop
+      playsInline
+      preload="none"
+    />
+  )
+}
 
 export function SideProjects() {
   return (
@@ -16,10 +34,14 @@ export function SideProjects() {
           <article key={p.title} className="panel side-card" data-reveal>
             {/* Out of the tab order: the button below is the same link. */}
             <a className="side-card__shot" href={p.url} target="_blank" rel="noreferrer" tabIndex={-1} data-cursor="Visit">
-              <picture>
-                <source type="image/webp" srcSet={`/images/${p.image}.webp`} />
-                <img src={`/images/${p.image}.jpg`} width={1200} height={750} loading="lazy" alt={p.alt} />
-              </picture>
+              {p.video ? (
+                <ShotVideo name={p.video} label={`${p.title} demo`} />
+              ) : (
+                <picture>
+                  <source type="image/webp" srcSet={`/images/${p.image}.webp`} />
+                  <img src={`/images/${p.image}.jpg`} width={1200} height={750} loading="lazy" alt={p.alt} />
+                </picture>
+              )}
             </a>
             <div className="panel__body side-card__body">
               <h3 className="display-4">{p.title}</h3>

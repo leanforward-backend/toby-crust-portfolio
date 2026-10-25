@@ -744,7 +744,8 @@ ul {
   aspect-ratio: 16 / 10;
 }
 
-.side-card__shot img {
+.side-card__shot img,
+.side-card__shot video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -752,7 +753,13 @@ ul {
   transition: transform 1.2s var(--ease);
 }
 
-.side-card__shot:hover img {
+.side-card__shot video {
+  object-position: center;
+  background: #000;
+}
+
+.side-card__shot:hover img,
+.side-card__shot:hover video {
   transform: scale(1.02);
 }
 
@@ -1129,7 +1136,8 @@ ul {
   }
 
   .phones__item,
-  .side-card__shot img {
+  .side-card__shot img,
+  .side-card__shot video {
     transition: none;
   }
 }

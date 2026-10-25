@@ -56,6 +56,7 @@ export const sideProjects = [
     title: 'TypeTracker',
     url: 'https://type-tracker.vercel.app/',
     image: 'typetracker',
+    video: 'typetracker-demo',
     alt: 'TypeTracker mid-race on a coding quote about TCP, at 48 wpm and 95% accuracy, with mistyped letters marked in red and a Generate AI Analysis panel below.',
     text: 'I really love this project I built and I use it everyday. Its a type racer where you type quotes from a specific genre, and can then get an AI explination of the quote. It charts every race, tracks the keys and words you miss and drills them in Mistakes mode. Gemini writes fresh quotes on any topic you pick.',
     tech: 'React · Convex · Clerk · Gemini API',
